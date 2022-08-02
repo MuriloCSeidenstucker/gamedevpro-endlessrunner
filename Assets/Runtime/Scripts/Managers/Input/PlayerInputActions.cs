@@ -46,6 +46,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Jump"",
+                    ""type"": ""Button"",
+                    ""id"": ""10f2a3a7-1675-4007-b037-988d8d02d7a1"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""PrimaryContact"",
                     ""type"": ""PassThrough"",
                     ""id"": ""fde45ce5-4f1d-4b8a-89e4-75159375e8a2"",
@@ -108,6 +117,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""PrimaryPosition"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""d60e21d5-bd1b-432e-b90d-f6002fc1ca19"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Jump"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -141,6 +161,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_LeftMove = m_Player.FindAction("LeftMove", throwIfNotFound: true);
         m_Player_RightMove = m_Player.FindAction("RightMove", throwIfNotFound: true);
+        m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_PrimaryContact = m_Player.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Player_PrimaryPosition = m_Player.FindAction("PrimaryPosition", throwIfNotFound: true);
     }
@@ -204,6 +225,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private IPlayerActions m_PlayerActionsCallbackInterface;
     private readonly InputAction m_Player_LeftMove;
     private readonly InputAction m_Player_RightMove;
+    private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_PrimaryContact;
     private readonly InputAction m_Player_PrimaryPosition;
     public struct PlayerActions
@@ -212,6 +234,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public PlayerActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
         public InputAction @LeftMove => m_Wrapper.m_Player_LeftMove;
         public InputAction @RightMove => m_Wrapper.m_Player_RightMove;
+        public InputAction @Jump => m_Wrapper.m_Player_Jump;
         public InputAction @PrimaryContact => m_Wrapper.m_Player_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Player_PrimaryPosition;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
@@ -229,6 +252,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @RightMove.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMove;
                 @RightMove.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMove;
                 @RightMove.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRightMove;
+                @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @PrimaryContact.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryContact;
                 @PrimaryContact.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryContact;
                 @PrimaryContact.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnPrimaryContact;
@@ -245,6 +271,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @RightMove.started += instance.OnRightMove;
                 @RightMove.performed += instance.OnRightMove;
                 @RightMove.canceled += instance.OnRightMove;
+                @Jump.started += instance.OnJump;
+                @Jump.performed += instance.OnJump;
+                @Jump.canceled += instance.OnJump;
                 @PrimaryContact.started += instance.OnPrimaryContact;
                 @PrimaryContact.performed += instance.OnPrimaryContact;
                 @PrimaryContact.canceled += instance.OnPrimaryContact;
@@ -277,6 +306,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     {
         void OnLeftMove(InputAction.CallbackContext context);
         void OnRightMove(InputAction.CallbackContext context);
+        void OnJump(InputAction.CallbackContext context);
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
     }

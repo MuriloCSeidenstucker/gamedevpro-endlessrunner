@@ -58,11 +58,11 @@ public class SwipeDetection : MonoBehaviour
     {
         if (Vector2.Dot(Vector2.up, direction) > _directionThreshold)
         {
-            Debug.Log("Swipe Up");
+            _inputManager.SetSwipeUp();
         }
         else if (Vector2.Dot(Vector2.down, direction) > _directionThreshold)
         {
-            Debug.Log("Swipe Down");
+            _inputManager.SetSwipeDown();
         }
         else if (Vector2.Dot(Vector2.left, direction) > _directionThreshold)
         {

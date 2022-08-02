@@ -11,7 +11,9 @@ public class InputManager : Singleton<InputManager>
     private PlayerInputActions _inputActions;
     private Camera _mainCamera;
 
+    public bool SwipeUp { get; private set; }
     public bool SwipeLeft { get; private set; }
+    public bool SwipeDown { get; private set; }
     public bool SwipeRight { get; private set; }
 
     protected override void Awake()
@@ -27,11 +29,7 @@ public class InputManager : Singleton<InputManager>
         _inputActions.Player.PrimaryContact.canceled += ctx => EndTouchPrimary(ctx);
     }
 
-    private void LateUpdate()
-    {
-        SwipeLeft = false;
-        SwipeRight = false;
-    }
+    private void LateUpdate() => ResetSwipe();
 
     private void OnEnable() => _inputActions.Player.Enable();
 
@@ -47,8 +45,19 @@ public class InputManager : Singleton<InputManager>
         OnEndTouch?.Invoke(Utils.ScreenToWorld(_mainCamera, _inputActions.Player.PrimaryPosition.ReadValue<Vector2>()), (float)ctx.time);
     }
 
+    private void ResetSwipe()
+    {
+        SwipeUp = false;
+        SwipeLeft = false;
+        SwipeDown = false;
+        SwipeRight = false;
+    }
+
+    public void SetSwipeUp() => SwipeUp = true;
     public void SetSwipeLeft() => SwipeLeft = true;
+    public void SetSwipeDown() => SwipeDown = true;
     public void SetSwipeRight() => SwipeRight = true;
-    public bool GetLeftMovement() => _inputActions.Player.LeftMove.WasPressedThisFrame() || SwipeLeft;
-    public bool GetRightMovement() => _inputActions.Player.RightMove.WasPressedThisFrame() || SwipeRight;
+    public bool GetLeftMoveInput() => _inputActions.Player.LeftMove.WasPressedThisFrame() || SwipeLeft;
+    public bool GetRightMoveInput() => _inputActions.Player.RightMove.WasPressedThisFrame() || SwipeRight;
+    public bool GetJumpInput() => _inputActions.Player.Jump.WasPressedThisFrame() || SwipeUp;
 }
