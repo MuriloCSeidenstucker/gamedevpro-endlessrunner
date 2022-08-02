@@ -292,6 +292,7 @@ GameObject:
   m_Component:
   - component: {fileID: 632210935}
   - component: {fileID: 632210936}
+  - component: {fileID: 632210937}
   m_Layer: 0
   m_Name: InputManager
   m_TagString: Untagged
@@ -326,7 +327,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ce3b492740ed6248954ccdf9bb6dc50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _swipeRange: 50
+--- !u!114 &632210937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 632210934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5460a73e8bbaca4b8e14b86ae15c2b4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _minDistance: 0.2
+  _maxTime: 0.5
+  _directionThreshold: 0.9
 --- !u!1 &643129806
 GameObject:
   m_ObjectHideFlags: 0
@@ -373,7 +388,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _horizontalSpeed: 10
-  _forwardSpeed: 10
+  _forwardSpeed: 5
+  _laneDistanceX: 1
 --- !u!1 &705507993
 GameObject:
   m_ObjectHideFlags: 0
@@ -566,7 +582,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 643129808}
-  _arm: {x: 0, y: 4.15, z: -6}
+  _armZ: -6
 --- !u!1 &979204349
 GameObject:
   m_ObjectHideFlags: 0
