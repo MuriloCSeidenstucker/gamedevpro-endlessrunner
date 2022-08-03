@@ -10,7 +10,11 @@ public class PlayerAnimationController : MonoBehaviour
 
     private void Awake() => _playerController = GetComponent<PlayerController>();
 
-    private void LateUpdate() => _animator.SetBool(PlayerAnimationID.IsJumping, _playerController.IsJumping);
+    private void LateUpdate()
+    {
+        _animator.SetBool(PlayerAnimationID.IsJumping, _playerController.IsJumping);
+        _animator.SetBool(PlayerAnimationID.IsRolling, _playerController.IsRolling);
+    }
 
     public void OnDeath() => _animator.SetTrigger(PlayerAnimationID.DeathTrigger);
 }

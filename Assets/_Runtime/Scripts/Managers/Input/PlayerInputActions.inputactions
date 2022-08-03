@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "Roll",
+                    "type": "Button",
+                    "id": "da586286-ba9e-42d4-953b-06a4049cd3ba",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "StartRun",
                     "type": "Button",
                     "id": "c2bce85d-acfb-4277-92a2-9ec2c1446d1b",
@@ -124,6 +133,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "StartRun",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "37749fda-9b3a-48c0-b47a-40763d002702",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Roll",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

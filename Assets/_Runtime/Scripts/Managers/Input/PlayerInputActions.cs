@@ -55,6 +55,15 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Roll"",
+                    ""type"": ""Button"",
+                    ""id"": ""da586286-ba9e-42d4-953b-06a4049cd3ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""StartRun"",
                     ""type"": ""Button"",
                     ""id"": ""c2bce85d-acfb-4277-92a2-9ec2c1446d1b"",
@@ -148,6 +157,17 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                     ""action"": ""StartRun"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""37749fda-9b3a-48c0-b47a-40763d002702"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Roll"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -182,6 +202,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         m_Player_LeftMove = m_Player.FindAction("LeftMove", throwIfNotFound: true);
         m_Player_RightMove = m_Player.FindAction("RightMove", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
+        m_Player_Roll = m_Player.FindAction("Roll", throwIfNotFound: true);
         m_Player_StartRun = m_Player.FindAction("StartRun", throwIfNotFound: true);
         m_Player_PrimaryContact = m_Player.FindAction("PrimaryContact", throwIfNotFound: true);
         m_Player_PrimaryPosition = m_Player.FindAction("PrimaryPosition", throwIfNotFound: true);
@@ -247,6 +268,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_LeftMove;
     private readonly InputAction m_Player_RightMove;
     private readonly InputAction m_Player_Jump;
+    private readonly InputAction m_Player_Roll;
     private readonly InputAction m_Player_StartRun;
     private readonly InputAction m_Player_PrimaryContact;
     private readonly InputAction m_Player_PrimaryPosition;
@@ -257,6 +279,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         public InputAction @LeftMove => m_Wrapper.m_Player_LeftMove;
         public InputAction @RightMove => m_Wrapper.m_Player_RightMove;
         public InputAction @Jump => m_Wrapper.m_Player_Jump;
+        public InputAction @Roll => m_Wrapper.m_Player_Roll;
         public InputAction @StartRun => m_Wrapper.m_Player_StartRun;
         public InputAction @PrimaryContact => m_Wrapper.m_Player_PrimaryContact;
         public InputAction @PrimaryPosition => m_Wrapper.m_Player_PrimaryPosition;
@@ -278,6 +301,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Jump.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
                 @Jump.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnJump;
+                @Roll.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
+                @Roll.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnRoll;
                 @StartRun.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartRun;
                 @StartRun.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartRun;
                 @StartRun.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnStartRun;
@@ -300,6 +326,9 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
                 @Jump.started += instance.OnJump;
                 @Jump.performed += instance.OnJump;
                 @Jump.canceled += instance.OnJump;
+                @Roll.started += instance.OnRoll;
+                @Roll.performed += instance.OnRoll;
+                @Roll.canceled += instance.OnRoll;
                 @StartRun.started += instance.OnStartRun;
                 @StartRun.performed += instance.OnStartRun;
                 @StartRun.canceled += instance.OnStartRun;
@@ -336,6 +365,7 @@ public partial class @PlayerInputActions : IInputActionCollection2, IDisposable
         void OnLeftMove(InputAction.CallbackContext context);
         void OnRightMove(InputAction.CallbackContext context);
         void OnJump(InputAction.CallbackContext context);
+        void OnRoll(InputAction.CallbackContext context);
         void OnStartRun(InputAction.CallbackContext context);
         void OnPrimaryContact(InputAction.CallbackContext context);
         void OnPrimaryPosition(InputAction.CallbackContext context);
