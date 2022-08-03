@@ -8,6 +8,9 @@ public class StartRunAnimationState : StateMachineBehaviour
     {
         //TODO: Assuming the PlayerController is on the parent object.
         PlayerController player = animator.transform.parent.GetComponent<PlayerController>();
-        player.enabled = true;
+        if (player != null)
+        {
+            player.enabled = true;
+        }
     }
 }

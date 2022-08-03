@@ -79,6 +79,7 @@ public class PlayerController : MonoBehaviour
     }
 
     private float ProcessLaneMovement() => Mathf.Lerp(transform.position.x, _targetPositionX, _horizontalSpeed * Time.deltaTime);
-
     private float ProcessForwardMovement() => transform.position.z + _forwardSpeed * Time.deltaTime;
+
+    public void OnDeath() => enabled = false;
 }

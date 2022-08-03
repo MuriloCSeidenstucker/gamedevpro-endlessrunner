@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 [RequireComponent(typeof(PlayerController))]
@@ -10,4 +11,6 @@ public class PlayerAnimationController : MonoBehaviour
     private void Awake() => _playerController = GetComponent<PlayerController>();
 
     private void LateUpdate() => _animator.SetBool(PlayerAnimationID.IsJumping, _playerController.IsJumping);
+
+    public void OnDeath() => _animator.SetTrigger(PlayerAnimationID.DeathTrigger);
 }

@@ -6,7 +6,10 @@ public class WaitGameStartAnimationState : StateMachineBehaviour
     {
         //TODO: Assuming the PlayerController is on the parent object.
         PlayerController player = animator.transform.parent.GetComponent<PlayerController>();
-        player.enabled = false;
+        if (player != null)
+        {
+            player.enabled = false;
+        }
     }
 
     public override void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
