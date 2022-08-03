@@ -30,6 +30,7 @@ public class PlayerController : MonoBehaviour
 
     public bool IsJumping { get; private set; }
     public bool IsRolling { get; private set; }
+    public bool IsDead { get; private set; }
     public float JumpDuration => _jumpDistanceZ / _forwardSpeed;
     public float RollDuration => _rollDistanceZ / _forwardSpeed;
 
@@ -37,6 +38,7 @@ public class PlayerController : MonoBehaviour
     {
         _inputManager = InputManager.Instance;
         _initialPosition = transform.position;
+        IsDead = false;
         StopRoll();
     }
 
@@ -57,6 +59,8 @@ public class PlayerController : MonoBehaviour
 
     private void ProcessInput()
     {
+        if (IsDead) return;
+
         if (_inputManager.GetLeftMoveInput())
             _targetPositionX -= _laneDistanceX;
         if (_inputManager.GetRightMoveInput())
@@ -131,5 +135,12 @@ public class PlayerController : MonoBehaviour
     private float ProcessLaneMovement() => Mathf.Lerp(transform.position.x, _targetPositionX, _horizontalSpeed * Time.deltaTime);
     private float ProcessForwardMovement() => transform.position.z + _forwardSpeed * Time.deltaTime;
 
-    public void OnDeath() => enabled = false;
+    public void OnDeath()
+    {
+        IsDead = true;
+        _horizontalSpeed = 0;
+        _forwardSpeed = 0;
+        StopJump();
+        StopRoll();
+    }
 }

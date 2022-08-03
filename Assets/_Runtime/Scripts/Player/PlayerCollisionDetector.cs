@@ -18,6 +18,7 @@ public class PlayerCollisionDetector : MonoBehaviour
         {
             _playerController.OnDeath();
             _animationController.OnDeath();
+            GameManager.Instance.OnGameOver();
         }
     }
 }
