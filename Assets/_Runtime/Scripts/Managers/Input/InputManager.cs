@@ -60,4 +60,5 @@ public class InputManager : Singleton<InputManager>
     public bool GetLeftMoveInput() => _inputActions.Player.LeftMove.WasPressedThisFrame() || SwipeLeft;
     public bool GetRightMoveInput() => _inputActions.Player.RightMove.WasPressedThisFrame() || SwipeRight;
     public bool GetJumpInput() => _inputActions.Player.Jump.WasPressedThisFrame() || SwipeUp;
+    public bool GetStartRunInput() => _inputActions.Player.StartRun.WasPressedThisFrame()|| _inputActions.Player.PrimaryContact.WasPressedThisFrame();
 }

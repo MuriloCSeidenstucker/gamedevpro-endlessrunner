@@ -33,6 +33,15 @@
                     "initialStateCheck": false
                 },
                 {
+                    "name": "StartRun",
+                    "type": "Button",
+                    "id": "c2bce85d-acfb-4277-92a2-9ec2c1446d1b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "PrimaryContact",
                     "type": "PassThrough",
                     "id": "fde45ce5-4f1d-4b8a-89e4-75159375e8a2",
@@ -104,6 +113,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Jump",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "83251c70-7b8c-4308-990d-19325ddf3ffc",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "StartRun",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
