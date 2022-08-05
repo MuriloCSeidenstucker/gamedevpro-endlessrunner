@@ -950,9 +950,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 643129808}
-  _segmentPrefabs:
-  - {fileID: 8976694171558315686, guid: ca6c1e586f320744b9b930a3489479e5, type: 3}
-  - {fileID: 8976694171558315686, guid: a67ef207ea9c5a74facbac6a1d47ed0a, type: 3}
   _firstTrackPrefab: {fileID: 1323399106283026906, guid: a3f8697587fa10740b4e4a240bc807e5, type: 3}
+  _easyTrackPrefabs:
+  - {fileID: 8976694171558315686, guid: ca6c1e586f320744b9b930a3489479e5, type: 3}
+  _hardTrackPrefabs:
+  - {fileID: 8976694171558315686, guid: a67ef207ea9c5a74facbac6a1d47ed0a, type: 3}
+  _rewardTrackPrefabs:
+  - {fileID: 5495524481705698011, guid: d62b4a8007f2a5245842205aade7fd75, type: 3}
   _initialTrackCount: 10
   _minTracksInFrontOfPlayer: 3
+  _minDistToConsiderInsideTrack: 3
+  _spawnPercentHardTrack: 0.3
+  _minTracksBeforeReward: 10
+  _maxTracksBeforeReward: 20
+  _minRewardTrackCount: 1
+  _maxRewardTrackCount: 2

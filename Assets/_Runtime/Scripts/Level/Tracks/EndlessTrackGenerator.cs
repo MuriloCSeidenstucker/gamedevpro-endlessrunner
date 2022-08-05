@@ -4,30 +4,47 @@ using UnityEngine;
 public class EndlessTrackGenerator : MonoBehaviour
 {
     [SerializeField] private PlayerController _player;
-    [SerializeField] private TrackSegment[] _segmentPrefabs;
+
+    [Header("Prefabs")]
     [SerializeField] private TrackSegment _firstTrackPrefab;
+    [SerializeField] private TrackSegment[] _easyTrackPrefabs;
+    [SerializeField] private TrackSegment[] _hardTrackPrefabs;
+    [SerializeField] private TrackSegment[] _rewardTrackPrefabs;
 
     [Header("Endless Generation Parameters")]
     [SerializeField] private int _initialTrackCount = 10;
     [SerializeField] private int _minTracksInFrontOfPlayer = 3;
     [SerializeField] private float _minDistToConsiderInsideTrack = 3.0f;
 
+    [Header("Level Difficulty Parameters")]
+    [SerializeField, Range(0f, 1f)] private float _spawnPercentHardTrack = 0.3f;
+    [SerializeField] private int _minTracksBeforeReward = 10;
+    [SerializeField] private int _maxTracksBeforeReward = 20;
+    [SerializeField] private int _minRewardTrackCount = 1;
+    [SerializeField] private int _maxRewardTrackCount = 2;
+
     private List<TrackSegment> _currentSegments = new List<TrackSegment>();
+    private int _rewardTracksLeftToSpawn;
+    private int _trackSpawnedAfterLastReward;
+    private bool _isSpawningRewardTracks;
+
 
     private void Start()
     {
-        if (_segmentPrefabs.Length > 0)
-        {
-            SpawnTrackSegment(_firstTrackPrefab, null);
-            SpawnTracks(_initialTrackCount);
-        }
+        SpawnTrackSegment(_firstTrackPrefab, null);
+        SpawnTracks(_initialTrackCount);
     }
 
     private void Update()
     {
+        UpdateTracks();
+    }
+
+    private void UpdateTracks()
+    {
         int playerTrackIndex = FindTrackIndexWithPlayer();
         if (playerTrackIndex < 0) return;
-        SpawnTracksInFrontOfPlayer(playerTrackIndex);
+        SpawnNewTracksIfNeeded(playerTrackIndex);
         DestroyTracksBehindPlayer(playerTrackIndex);
     }
 
@@ -39,9 +56,23 @@ public class EndlessTrackGenerator : MonoBehaviour
 
         for (int i = 0; i < trackCount; i++)
         {
-            TrackSegment track = _segmentPrefabs[Random.Range(0, _segmentPrefabs.Length)];
+            TrackSegment track = GetRandomTrack();
             previousTrack = SpawnTrackSegment(track, previousTrack);
         }
+    }
+
+    private TrackSegment GetRandomTrack()
+    {
+        TrackSegment[] trackList = null;
+        if (_isSpawningRewardTracks)
+        {
+            trackList = _rewardTrackPrefabs;
+        }
+        else
+        {
+            trackList = Random.value <= _spawnPercentHardTrack ? _hardTrackPrefabs : _easyTrackPrefabs;
+        }
+        return trackList[Random.Range(0, trackList.Length)];
     }
 
     private TrackSegment SpawnTrackSegment(TrackSegment track, TrackSegment previousTrack)
@@ -63,7 +94,33 @@ public class EndlessTrackGenerator : MonoBehaviour
         }
 
         _currentSegments.Add(trackInstance);
+
+        UpdateRewardTracking();
+
         return trackInstance;
+    }
+
+    private void UpdateRewardTracking()
+    {
+        if (_isSpawningRewardTracks)
+        {
+            _rewardTracksLeftToSpawn--;
+            if (_rewardTracksLeftToSpawn <= 0)
+            {
+                _isSpawningRewardTracks = false;
+                _trackSpawnedAfterLastReward = 0;
+            }
+        }
+        else
+        {
+            _trackSpawnedAfterLastReward++;
+            int requiredTracksBeforeReward = Random.Range(_minTracksBeforeReward, _maxTracksBeforeReward + 1);
+            if (_trackSpawnedAfterLastReward >= requiredTracksBeforeReward)
+            {
+                _isSpawningRewardTracks = true;
+                _rewardTracksLeftToSpawn = Random.Range(_minRewardTrackCount, _maxRewardTrackCount + 1);
+            }
+        }
     }
 
     private int FindTrackIndexWithPlayer()
@@ -83,7 +140,7 @@ public class EndlessTrackGenerator : MonoBehaviour
         return playerTrackIndex;
     }
 
-    private void SpawnTracksInFrontOfPlayer(int playerTrackIndex)
+    private void SpawnNewTracksIfNeeded(int playerTrackIndex)
     {
         int tracksInFrontOfPlayer = _currentSegments.Count - (playerTrackIndex + 1);
         if (tracksInFrontOfPlayer < _minTracksInFrontOfPlayer)
