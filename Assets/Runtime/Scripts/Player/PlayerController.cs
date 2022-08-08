@@ -33,6 +33,8 @@ public class PlayerController : MonoBehaviour
     public bool IsDead { get; private set; }
     public float JumpDuration => _jumpDistanceZ / _forwardSpeed;
     public float RollDuration => _rollDistanceZ / _forwardSpeed;
+    public float ForwardSpeed => _forwardSpeed;
+    public float TravelledDistance => transform.position.z - _initialPosition.z;
 
     private void Awake()
     {
