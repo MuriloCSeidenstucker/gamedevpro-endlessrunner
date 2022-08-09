@@ -4,14 +4,13 @@ using UnityEngine;
 public class SwipeDetection : MonoBehaviour
 {
     [SerializeField] private float _minDistance = 0.2f;
-    [SerializeField] private float _maxTime = 1.0f;
     [SerializeField, Range(0f, 1f)] private float _directionThreshold = 0.9f;
 
     private InputManager _inputManager;
     private Vector2 _startPosition;
-    private Vector2 _endPosition;
-    private float _startTime;
-    private float _endTime;
+    private Vector2 _currentPosition;
+    private bool _isTouching;
+    private bool _isSwipeDetected;
 
     private void Awake() => _inputManager = InputManager.Instance;
 
@@ -30,25 +29,37 @@ public class SwipeDetection : MonoBehaviour
         }
     }
 
-    private void SwipeStart(Vector2 position, float time)
+    private void Update()
     {
-        _startPosition = position;
-        _startTime = time;
+        if (_isTouching)
+            UpdateCurrentPosition();
     }
 
-    private void SwipeEnd(Vector2 position, float time)
+    private void SwipeStart(Vector2 position)
     {
-        _endPosition = position;
-        _endTime = time;
+        _isTouching = true;
+        _startPosition = position;
+    }
+
+    private void UpdateCurrentPosition()
+    {
+        _currentPosition = _inputManager.GetTouchPosition();
         DetectSwipe();
+    }
+
+    private void SwipeEnd(Vector2 position)
+    {
+        _isTouching = false;
+        _isSwipeDetected = false;
     }
 
     private void DetectSwipe()
     {
-        if (Vector3.Distance(_startPosition, _endPosition) >= _minDistance
-            && (_endTime - _startTime) <= _maxTime)
+        if (Vector3.Distance(_startPosition, _currentPosition) >= _minDistance
+            && !_isSwipeDetected)
         {
-            Vector3 direction = _endPosition - _startPosition;
+            _isSwipeDetected = true;
+            Vector3 direction = _currentPosition - _startPosition;
             Vector2 direction2D = new Vector2(direction.x, direction.y).normalized;
             SwipeDirection(direction2D);
         }

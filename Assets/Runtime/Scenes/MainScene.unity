@@ -483,7 +483,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
-  m_DragThreshold: 10
+  m_DragThreshold: 1
 --- !u!114 &271136198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -990,7 +990,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _minDistance: 0.2
-  _maxTime: 0.5
   _directionThreshold: 0.9
 --- !u!1 &643129806
 GameObject:

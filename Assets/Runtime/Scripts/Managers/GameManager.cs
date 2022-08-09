@@ -17,6 +17,7 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
+        Application.targetFrameRate = -1;
         Time.timeScale = 1f;
         ScreenController.Instance.ShowScreen<InGameScreen>();
     }
