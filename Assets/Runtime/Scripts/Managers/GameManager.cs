@@ -9,14 +9,15 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private MusicPlayer _musicPlayer;
     [SerializeField] private float _reloadGameDelay = 3.0f;
     [SerializeField] private float _baseScoreMultiplier = 1.0f;
-    [SerializeField] private float _countdown = 3.0f;
+    [SerializeField] private int _countdown = 3;
 
     private ScreenController _screenController;
     private float _score;
+    private bool _isDead;
 
     public int Score => Mathf.RoundToInt(_score);
     public int TravelledDistance => Mathf.RoundToInt(_playerController.TravelledDistance);
-    public float Countdown => _countdown;
+    public int Countdown => _countdown;
 
     protected override void Awake()
     {
@@ -47,6 +48,9 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator ReloadGameCor()
     {
+        _isDead = true;
+        yield return new WaitForSeconds(seconds: 0.5f);
+        _musicPlayer.PlayGameOverMusic();
         yield return new WaitForSeconds(_reloadGameDelay);
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
@@ -61,6 +65,7 @@ public class GameManager : Singleton<GameManager>
 
     public void PauseGame()
     {
+        if (_isDead) return;
         Time.timeScale = 0f;
         _screenController.ShowScreen<PauseGameScreen>();
     }
