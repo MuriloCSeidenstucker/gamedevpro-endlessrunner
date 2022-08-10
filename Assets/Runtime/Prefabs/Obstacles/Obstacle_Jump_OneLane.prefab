@@ -7,14 +7,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 175925502921715325, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 175925502921715325, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationSpawners.Array.data[0]
-      value: 
-      objectReference: {fileID: 7458306459742613276}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Size.x
       value: 0.7
@@ -39,6 +31,14 @@ PrefabInstance:
       propertyPath: m_Center.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1866883507473763490, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
+      propertyPath: _decorationSpawners.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866883507473763490, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
+      propertyPath: _decorationSpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 7458306459742613276}
     - target: {fileID: 3993550304025950263, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Name
       value: Obstacle_Jump_OneLane

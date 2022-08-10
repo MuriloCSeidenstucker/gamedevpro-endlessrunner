@@ -7,26 +7,26 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 175925502921715325, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 175925502921715325, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationSpawners.Array.data[0]
-      value: 
-      objectReference: {fileID: 1332225527256378489}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Size.y
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Center.x
-      value: 1.4
+      value: 1.45
       objectReference: {fileID: 0}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Center.y
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1866883507473763490, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
+      propertyPath: _decorationSpawners.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866883507473763490, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
+      propertyPath: _decorationSpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 1332225527256378489}
     - target: {fileID: 3993550304025950263, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Name
       value: Obstacle_Dodge_Right
@@ -119,10 +119,6 @@ PrefabInstance:
       propertyPath: _decorationOptions.Array.data[2]
       value: 
       objectReference: {fileID: 8104509965250040314, guid: ab30a2b409f5afc4ebe08443e529d318, type: 3}
-    - target: {fileID: 9010360676223952342, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationOptions.Array.data[3]
-      value: 
-      objectReference: {fileID: 8104509965250040314, guid: 3784a0597cdfd9b4f895549ed66a35a2, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
 --- !u!114 &1332225527256378489 stripped

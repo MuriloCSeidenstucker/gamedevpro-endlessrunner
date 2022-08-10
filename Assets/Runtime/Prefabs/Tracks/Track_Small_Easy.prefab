@@ -77,9 +77,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
---- !u!114 &3355236197387243432 stripped
+--- !u!114 &120028336532929033 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4308159680530799279, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1509819469079834382, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
   m_PrefabInstance: {fileID: 1538429986942113031}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -102,7 +102,7 @@ PrefabInstance:
     - target: {fileID: 281302568769319062, guid: 56d89104679771c4180f7d6992c5094d, type: 3}
       propertyPath: _obstacleSpawners.Array.data[0]
       value: 
-      objectReference: {fileID: 3355236197387243432}
+      objectReference: {fileID: 120028336532929033}
     - target: {fileID: 3522054108673442174, guid: 56d89104679771c4180f7d6992c5094d, type: 3}
       propertyPath: m_Name
       value: Track_Small_Easy

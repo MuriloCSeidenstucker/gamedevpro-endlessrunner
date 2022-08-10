@@ -15,14 +15,28 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlaySFX(AudioClip clip)
     {
-        _sfxSource.clip = clip;
-        _sfxSource.Play();
+        if (_sfxSource.outputAudioMixerGroup == null)
+        {
+            Debug.LogError("MissingComponentError: There is no \"AudioMixerGroup\" attached to the \"AudioSource\" game object.");
+        }
+        else
+        {
+            _sfxSource.clip = clip;
+            _sfxSource.Play();
+        }
     }
 
     public void PlayMusic(AudioClip clip)
     {
-        _musicSource.clip = clip;
-        _musicSource.Play();
+        if (_musicSource.outputAudioMixerGroup == null)
+        {
+            Debug.LogError("MissingComponentError: There is no \"AudioMixerGroup\" attached to the \"AudioSource\" game object.");
+        }
+        else
+        {
+            _musicSource.clip = clip;
+            _musicSource.Play();
+        }
     }
 
     public void StopMusic() => _musicSource.Stop();

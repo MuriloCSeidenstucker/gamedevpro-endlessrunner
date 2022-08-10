@@ -57,9 +57,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
---- !u!114 &9064108911876549494 stripped
+--- !u!114 &5976403843818233559 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4308159680530799279, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1509819469079834382, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
   m_PrefabInstance: {fileID: 5045024920416317913}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
@@ -98,11 +98,11 @@ PrefabInstance:
     - target: {fileID: 1149978717091760054, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
       propertyPath: _obstacleSpawners.Array.data[0]
       value: 
-      objectReference: {fileID: 5748376919001738357}
+      objectReference: {fileID: 6988472763466717652}
     - target: {fileID: 1149978717091760054, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
       propertyPath: _obstacleSpawners.Array.data[1]
       value: 
-      objectReference: {fileID: 9064108911876549494}
+      objectReference: {fileID: 5976403843818233559}
     - target: {fileID: 1865861200250071666, guid: 6f4192bd67111cb4bbc5e7787f58a8fb, type: 3}
       propertyPath: m_RootOrder
       value: 3
@@ -231,9 +231,9 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
---- !u!114 &5748376919001738357 stripped
+--- !u!114 &6988472763466717652 stripped
 MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4308159680530799279, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
+  m_CorrespondingSourceObject: {fileID: 1509819469079834382, guid: 423bfe7f661113443b3d00dc945cce98, type: 3}
   m_PrefabInstance: {fileID: 8363182572701087450}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}

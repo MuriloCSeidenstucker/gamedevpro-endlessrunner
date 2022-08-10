@@ -7,17 +7,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 175925502921715325, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationSpawners.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 175925502921715325, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
-      propertyPath: _decorationSpawners.Array.data[0]
-      value: 
-      objectReference: {fileID: 9089477634147630931}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Size.x
-      value: 4.5
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Size.y
@@ -33,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Center.y
-      value: 1.7
+      value: 1.5
       objectReference: {fileID: 0}
     - target: {fileID: 698723583393309539, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Center.z
@@ -43,6 +35,14 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1866883507473763490, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
+      propertyPath: _decorationSpawners.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1866883507473763490, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
+      propertyPath: _decorationSpawners.Array.data[0]
+      value: 
+      objectReference: {fileID: 9089477634147630931}
     - target: {fileID: 3993550304025950263, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: m_Name
       value: Obstacle_Roll
@@ -110,11 +110,11 @@ PrefabInstance:
     - target: {fileID: 9010360676223952342, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: decorationOptions.Array.data[0]
       value: 
-      objectReference: {fileID: 3885668677569471444, guid: f0c710829958ed742b7a7d9ac1fa2b3e, type: 3}
+      objectReference: {fileID: 8104509965250040314, guid: 8fb39b884b7f2844ebc5e77ad817318e, type: 3}
     - target: {fileID: 9010360676223952342, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
       propertyPath: _decorationOptions.Array.data[0]
       value: 
-      objectReference: {fileID: 3885668677569471444, guid: f0c710829958ed742b7a7d9ac1fa2b3e, type: 3}
+      objectReference: {fileID: 8104509965250040314, guid: 8fb39b884b7f2844ebc5e77ad817318e, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9dbe8e8a22d8d4b4aab07557037dac63, type: 3}
 --- !u!114 &9089477634147630931 stripped

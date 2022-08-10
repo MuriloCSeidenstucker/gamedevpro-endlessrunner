@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8071472452907903754}
-  - component: {fileID: 175925502921715325}
+  - component: {fileID: 1866883507473763490}
   - component: {fileID: 698723583393309539}
   m_Layer: 0
   m_Name: Obstacle_Base
@@ -34,7 +34,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &175925502921715325
+--- !u!114 &1866883507473763490
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a930a56ca9acdc4e94ea89b21e72f3f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _decorationSpawners: []
 --- !u!65 &698723583393309539
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -103,4 +104,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a6d31857365f347409107a0c2c9bfdda, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  decorationOptions: []
+  _decorationOptions: []
