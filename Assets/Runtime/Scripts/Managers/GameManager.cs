@@ -7,17 +7,25 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PlayerAnimationController _playerAnimationController;
     [SerializeField] private MusicPlayer _musicPlayer;
+
+    [Header("Gameplay parameters")]
+    [SerializeField] private float _startPlayerSpeed = 10.0f;
+    [SerializeField] private float _maxPlayerSpeed = 15.0f;
+    [SerializeField] private float _timeToMaxSpeedSeconds = 300.0f;
     [SerializeField] private float _reloadGameDelay = 3.0f;
+    [SerializeField, Range(0, 5)] private int _startGameCountdown = 3;
+
+    [Header("Score parameters")]
     [SerializeField] private float _baseScoreMultiplier = 1.0f;
-    [SerializeField] private int _countdown = 3;
 
     private ScreenController _screenController;
     private float _score;
-    private bool _isDead;
+    private float _startGameTime;
+    private bool _isGameRunning;
 
     public int Score => Mathf.RoundToInt(_score);
     public int TravelledDistance => Mathf.RoundToInt(_playerController.TravelledDistance);
-    public int Countdown => _countdown;
+    public int StartGameCountdown => _startGameCountdown;
 
     protected override void Awake()
     {
@@ -37,18 +45,21 @@ public class GameManager : Singleton<GameManager>
         _screenController = ScreenController.Instance;
         _screenController.ShowScreen<WaitGameStartScreen>();
         _playerController.enabled = false;
+        _isGameRunning = false;
     }
 
     private void UpdateScore()
     {
-        if (!_playerController.enabled) return;
+        if (!_isGameRunning) return;
 
-        _score += _baseScoreMultiplier * _playerController.ForwardSpeed * Time.deltaTime;
+        float timePercent = (Time.time - _startGameTime) / _timeToMaxSpeedSeconds;
+        _playerController.ForwardSpeed = Mathf.Lerp(_startPlayerSpeed, _maxPlayerSpeed, timePercent);
+        float extraScoreMultiplier = 1 + timePercent;
+        _score += _baseScoreMultiplier * extraScoreMultiplier * _playerController.ForwardSpeed * Time.deltaTime;
     }
 
     private IEnumerator ReloadGameCor()
     {
-        _isDead = true;
         yield return new WaitForSeconds(seconds: 0.5f);
         _musicPlayer.PlayGameOverMusic();
         yield return new WaitForSeconds(_reloadGameDelay);
@@ -59,13 +70,18 @@ public class GameManager : Singleton<GameManager>
     {
         _musicPlayer.PlayMainTrackMusic();
         _screenController.ShowScreen<InGameScreen>();
-        yield return new WaitForSeconds(Countdown);
-        _playerAnimationController.OnStart();
+        yield return new WaitForSeconds(StartGameCountdown);
+        yield return StartCoroutine(_playerAnimationController.OnStartCor());
+
+        _playerController.enabled = true;
+        _playerController.ForwardSpeed = _startPlayerSpeed;
+        _startGameTime = Time.time;
+        _isGameRunning = true;
     }
 
     public void PauseGame()
     {
-        if (_isDead) return;
+        if (!_isGameRunning) return;
         Time.timeScale = 0f;
         _screenController.ShowScreen<PauseGameScreen>();
     }
@@ -76,7 +92,12 @@ public class GameManager : Singleton<GameManager>
         _screenController.ShowScreen<InGameScreen>();
     }
 
-    public void StartGame() => StartCoroutine(StartGameCor());
-    public void OnGameOver() => StartCoroutine(ReloadGameCor());
+    public void OnGameOver()
+    {
+        _isGameRunning = false;
+        _playerController.ForwardSpeed = 0f;
+        StartCoroutine(ReloadGameCor());
+    }
 
+    public void StartGame() => StartCoroutine(StartGameCor());
 }

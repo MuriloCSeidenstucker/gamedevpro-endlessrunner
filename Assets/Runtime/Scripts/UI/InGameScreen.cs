@@ -18,7 +18,7 @@ public class InGameScreen : UIScreen
     private void Awake()
     {
         _gameManager = GameManager.Instance;
-        _countdown = _gameManager.Countdown;
+        _countdown = _gameManager.StartGameCountdown;
 
         if (!_wasCountdownPerformed || _countdown > 0f)
             StartCoroutine(PerformCountdownCor());

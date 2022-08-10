@@ -7,7 +7,6 @@ public class PlayerController : MonoBehaviour
     
     [Header("Movement Parameters")]
     [SerializeField] private float _horizontalSpeed = 10.0f;
-    [SerializeField] private float _forwardSpeed = 10.0f;
     [SerializeField] private float _laneDistanceX = 2.0f;
 
     [Header("Jump Parameters")]
@@ -34,9 +33,9 @@ public class PlayerController : MonoBehaviour
     public bool IsJumping { get; private set; }
     public bool IsRolling { get; private set; }
     public bool IsDead { get; private set; }
-    public float JumpDuration => _jumpDistanceZ / _forwardSpeed;
-    public float RollDuration => _rollDistanceZ / _forwardSpeed;
-    public float ForwardSpeed => _forwardSpeed;
+    public float ForwardSpeed { get; set; }
+    public float JumpDuration => _jumpDistanceZ / ForwardSpeed;
+    public float RollDuration => _rollDistanceZ / ForwardSpeed;
     public float TravelledDistance => transform.position.z - _initialPosition.z;
 
     private void Awake()
@@ -140,14 +139,16 @@ public class PlayerController : MonoBehaviour
     }
 
     private float ProcessLaneMovement() => Mathf.Lerp(transform.position.x, _targetPositionX, _horizontalSpeed * Time.deltaTime);
-    private float ProcessForwardMovement() => transform.position.z + _forwardSpeed * Time.deltaTime;
+    private float ProcessForwardMovement() => transform.position.z + ForwardSpeed * Time.deltaTime;
 
     public void OnDeath()
     {
         IsDead = true;
         _horizontalSpeed = 0;
-        _forwardSpeed = 0;
+        ForwardSpeed = 0;
         StopJump();
         StopRoll();
+        _regularCollider.enabled = false;
+        _rollCollider.enabled = false;
     }
 }
