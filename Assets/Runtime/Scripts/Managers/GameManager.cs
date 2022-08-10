@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PlayerAnimationController _playerAnimationController;
+    [SerializeField] private MusicPlayer _musicPlayer;
     [SerializeField] private float _reloadGameDelay = 3.0f;
     [SerializeField] private float _baseScoreMultiplier = 1.0f;
     [SerializeField] private float _countdown = 3.0f;
@@ -21,17 +22,27 @@ public class GameManager : Singleton<GameManager>
     {
         base.Awake();
 
-        Application.targetFrameRate = -1;
-        Time.timeScale = 1f;
+        SetWaitForStartGameState();
+    }
+
+    private void Update()
+    {
+        UpdateScore();
+    }
+
+    private void SetWaitForStartGameState()
+    {
+        _musicPlayer.PlayStartMenuMusic();
         _screenController = ScreenController.Instance;
         _screenController.ShowScreen<WaitGameStartScreen>();
         _playerController.enabled = false;
     }
 
-    private void Update()
+    private void UpdateScore()
     {
-        if (_playerController.enabled)
-            _score += _baseScoreMultiplier * _playerController.ForwardSpeed * Time.deltaTime;
+        if (!_playerController.enabled) return;
+
+        _score += _baseScoreMultiplier * _playerController.ForwardSpeed * Time.deltaTime;
     }
 
     private IEnumerator ReloadGameCor()
@@ -42,6 +53,7 @@ public class GameManager : Singleton<GameManager>
 
     private IEnumerator StartGameCor()
     {
+        _musicPlayer.PlayMainTrackMusic();
         _screenController.ShowScreen<InGameScreen>();
         yield return new WaitForSeconds(Countdown);
         _playerAnimationController.OnStart();

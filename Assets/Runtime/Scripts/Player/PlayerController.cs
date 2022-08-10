@@ -3,6 +3,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private PlayerAudioController _playerAudioController;
+    
+    [Header("Movement Parameters")]
     [SerializeField] private float _horizontalSpeed = 10.0f;
     [SerializeField] private float _forwardSpeed = 10.0f;
     [SerializeField] private float _laneDistanceX = 2.0f;
@@ -80,6 +83,7 @@ public class PlayerController : MonoBehaviour
         IsJumping = true;
         _jumpStartZ = transform.position.z;
         StopRoll();
+        _playerAudioController.PlayJumpSFX();
     }
 
     private float ProcessJump()
@@ -113,6 +117,7 @@ public class PlayerController : MonoBehaviour
         _regularCollider.enabled = false;
         _rollCollider.enabled = true;
         StopJump();
+        _playerAudioController.PlayRollSFX();
     }
 
     private void ProcessRoll()
