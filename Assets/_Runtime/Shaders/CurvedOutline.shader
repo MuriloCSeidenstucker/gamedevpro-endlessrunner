@@ -31,8 +31,8 @@ Shader "Unlit/CurvedOutline" {
 	v2f vert(appdata v) {
 		v2f o;
 		float4 rotVert = v.vertex;
-		rotVert.z = v.vertex.z * cos(_Time.y * _RotationSpeed) - v.vertex.x * sin(_Time.y * _RotationSpeed);
-		rotVert.x = v.vertex.z * sin(_Time.y * _RotationSpeed) + v.vertex.x * cos(_Time.y * _RotationSpeed);
+		rotVert.x = v.vertex.x * cos(_Time.y * _RotationSpeed) + v.vertex.y * sin(_Time.y * _RotationSpeed);
+		rotVert.y = -v.vertex.x * sin(_Time.y * _RotationSpeed) + v.vertex.y * cos(_Time.y * _RotationSpeed);
 
 		o.pos = ObjectToCurvedClipPos(rotVert, _CurveStrength);
 
