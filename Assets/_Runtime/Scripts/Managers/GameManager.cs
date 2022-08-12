@@ -19,6 +19,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private float _baseScoreMultiplier = 1.0f;
 
     private ScreenController _screenController;
+    private GameSaver _gameSaver;
     private float _score;
     private float _startGameTime;
     private bool _isGameRunning;
@@ -26,6 +27,7 @@ public class GameManager : Singleton<GameManager>
     public int Score => Mathf.RoundToInt(_score);
     public int TravelledDistance => Mathf.RoundToInt(_playerController.TravelledDistance);
     public int StartGameCountdown => _startGameCountdown;
+    public GameData CurrentSave { get; private set; }
     public int CherryCount { get; private set; }
 
     protected override void Awake()
@@ -35,14 +37,13 @@ public class GameManager : Singleton<GameManager>
         SetWaitForStartGameState();
     }
 
-    private void Update()
-    {
-        UpdateScore();
-    }
+    private void Update() => UpdateScore();
 
     private void SetWaitForStartGameState()
     {
         _musicPlayer.PlayStartMenuMusic();
+        _gameSaver = GetComponent<GameSaver>();
+        CurrentSave = _gameSaver.LoadGame();
         _screenController = ScreenController.Instance;
         _screenController.ShowScreen<WaitGameStartScreen>();
         _playerController.enabled = false;
@@ -95,6 +96,13 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGameOver()
     {
+        _gameSaver.SaveGame(new GameData()
+        {
+            BestScore = CurrentSave.BestScore < Score ? Score : CurrentSave.BestScore,
+            LastScore = Score,
+            TotalAmountCherries = CurrentSave.TotalAmountCherries + CherryCount
+        });
+
         _isGameRunning = false;
         _playerController.ForwardSpeed = 0f;
         StartCoroutine(ReloadGameCor());
