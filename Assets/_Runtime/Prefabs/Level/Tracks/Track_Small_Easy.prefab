@@ -103,6 +103,10 @@ PrefabInstance:
       propertyPath: _obstacleSpawners.Array.data[0]
       value: 
       objectReference: {fileID: 120028336532929033}
+    - target: {fileID: 1278305331729278516, guid: 56d89104679771c4180f7d6992c5094d, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3522054108673442174, guid: 56d89104679771c4180f7d6992c5094d, type: 3}
       propertyPath: m_Name
       value: Track_Small_Easy
@@ -153,7 +157,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7284179653482776095, guid: 56d89104679771c4180f7d6992c5094d, type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 56d89104679771c4180f7d6992c5094d, type: 3}

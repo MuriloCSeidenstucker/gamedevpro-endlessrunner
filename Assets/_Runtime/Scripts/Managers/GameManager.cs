@@ -2,10 +2,15 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] private PlayerController _playerController;
     [SerializeField] private PlayerAnimationController _playerAnimationController;
+    [SerializeField] private AudioController _audioController;
     [SerializeField] private MusicPlayer _musicPlayer;
 
     [Header("Gameplay parameters")]
@@ -27,27 +32,32 @@ public class GameManager : Singleton<GameManager>
     public int Score => Mathf.RoundToInt(_score);
     public int TravelledDistance => Mathf.RoundToInt(_playerController.TravelledDistance);
     public int StartGameCountdown => _startGameCountdown;
-    public GameData CurrentSave { get; private set; }
+    public GameData CurrentSave => _gameSaver.CurrentGameData;
     public int CherryCount { get; private set; }
 
     protected override void Awake()
     {
         base.Awake();
 
-        SetWaitForStartGameState();
+        StartCoroutine(SetWaitForStartGameState());
     }
 
-    private void Update() => UpdateScore();
-
-    private void SetWaitForStartGameState()
+    private void Update()
     {
-        _musicPlayer.PlayStartMenuMusic();
+        UpdateScore();
+    }
+
+    private IEnumerator SetWaitForStartGameState()
+    {
         _gameSaver = GetComponent<GameSaver>();
-        CurrentSave = _gameSaver.LoadGame();
+        _gameSaver.LoadGame();
         _screenController = ScreenController.Instance;
         _screenController.ShowScreen<WaitGameStartScreen>();
         _playerController.enabled = false;
         _isGameRunning = false;
+        float startGameDelay = 0.1f;
+        yield return new WaitForSeconds(startGameDelay);
+        _musicPlayer.PlayStartMenuMusic();
     }
 
     private void UpdateScore()
@@ -96,7 +106,7 @@ public class GameManager : Singleton<GameManager>
 
     public void OnGameOver()
     {
-        _gameSaver.SaveGame(new GameData()
+        _gameSaver.SaveGameData(new GameData()
         {
             BestScore = CurrentSave.BestScore < Score ? Score : CurrentSave.BestScore,
             LastScore = Score,
@@ -106,6 +116,21 @@ public class GameManager : Singleton<GameManager>
         _isGameRunning = false;
         _playerController.ForwardSpeed = 0f;
         StartCoroutine(ReloadGameCor());
+    }
+
+    public void DeleteAllData()
+    {
+        _gameSaver.DeleteAllData();
+        _gameSaver.LoadGame();
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        EditorApplication.ExitPlaymode();
+#else
+        Application.Quit();
+#endif
     }
 
     public void StartGame() => StartCoroutine(StartGameCor());
