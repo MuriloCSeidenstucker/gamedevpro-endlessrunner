@@ -10,4 +10,4 @@ O curso ensina a fazer o jogo para Windows e eu o adaptei para Android.
 | :rocket: URL         | https://murilocseidenstucker.itch.io/gamedevpro-endlessrunner
 
 <!-- Inserir imagem com a #vitrinedev ao final do link -->
-![](https://img.itch.zone/aW1hZ2UvMTk0MjMxOC8xMTQxODk5OS5qcGVn/original/RNPqZt.jpeg#vitrinedev)
+![](https://img.itch.zone/aW1hZ2UvMTk0MjMxOC8xMTQ1MDcyNS5qcGVn/347x500/73JtlB.jpeg#vitrinedev)
